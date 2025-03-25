@@ -12,7 +12,7 @@ function updateCountdown() {
             <p class="highlight">Mohon maaf lahir dan batin. 🤲✨</p>
         </div>
     `;
-    document.querySelector(".eid-message").classList.add("fade-in"); // Animasi muncul
+    document.querySelector(".eid-message").classList.add("fade-in");
     return;
   }
 
@@ -31,3 +31,28 @@ function updateCountdown() {
 
 const countdownInterval = setInterval(updateCountdown, 1000);
 updateCountdown();
+
+// 🔒 Blokir Klik Kanan
+document.addEventListener("contextmenu", function (e) {
+  e.preventDefault();
+});
+
+// 🔒 Blokir F12, Ctrl+Shift+I, Ctrl+U
+document.addEventListener("keydown", function (e) {
+  if (
+    e.key === "F12" ||
+    (e.ctrlKey && e.shiftKey && e.key === "I") ||
+    (e.ctrlKey && e.key === "u")
+  ) {
+    e.preventDefault();
+  }
+});
+
+setInterval(() => {
+  let before = new Date().getTime();
+  debugger;
+  let after = new Date().getTime();
+  if (after - before > 100) {
+    window.location.href = "https://google.com";
+  }
+}, 1000);
