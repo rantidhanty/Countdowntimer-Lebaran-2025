@@ -128,16 +128,18 @@ document.addEventListener("DOMContentLoaded", function () {
   const musicIcon = musicBtn.querySelector("i"); // Ambil ikon di dalam tombol
 
   // Tampilkan alert di awal
-  alert("Silahkan klik tombol pojok kanan ikon music 🎵");
+  alert(
+    "🌙 Taqabbalallahu minna wa minkum, Kami dari Keluarga Besar TK Islam Harapan Sukatani mengucapkan Selamat Hari Raya Idul Fitri! mohon maaf lahir dan batin. Klik tombol musik di pojok kanan untuk merasakan suasana yang lebih indah 🎶"
+  );
 
   // Fungsi toggle musik (Play/Pause)
   function toggleMusic() {
     if (music.paused) {
       music.play();
-      musicIcon.className = "ri-pause-fill"; // Ganti ikon jadi pause
+      musicIcon.className = "ri-pause-fill";
     } else {
       music.pause();
-      musicIcon.className = "ri-music-2-fill"; // Ganti ikon jadi music
+      musicIcon.className = "ri-music-2-fill";
     }
   }
 
