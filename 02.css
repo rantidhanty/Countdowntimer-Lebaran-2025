@@ -5,45 +5,34 @@ body {
   height: 100vh;
   overflow: hidden;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background: linear-gradient(to bottom, #009688, #004d40);
   color: white;
   text-align: center;
 }
 
 #particles-js {
-  position: relative;
-  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  width: 100%;
-  padding: 20px 0;
-  box-sizing: border-box;
-  min-height: calc(100vh - 100px); /* Adjust based on footer height */
-}
-
-.content-wrapper {
-  width: 90%;
+  width: 90vw;
   max-width: 900px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  justify-content: space-around;
+  padding: 20px;
+  min-height: 100vh;
 }
 
 .text h1 {
-  font-size: clamp(1.2rem, 4vw, 1.8rem);
-  margin: 0;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  margin-top: 0;
   font-weight: bold;
 }
 
 .text h2 {
-  font-size: clamp(1rem, 4vw, 1.4rem);
+  font-size: clamp(1.2rem, 5vw, 1.5rem);
   font-weight: bold;
-  margin: 10px 0;
+  margin-top: 10px;
 }
 
 .text h2 span {
@@ -52,55 +41,59 @@ body {
 }
 
 .text p {
-  font-size: clamp(0.7rem, 2.5vw, 0.9rem);
-  margin: 8px 0;
-  line-height: 1.4;
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
+  padding: 0 10px;
+  line-height: 1.5;
 }
 
-.text a {
+/* .text a {
   display: inline-block;
-  font-size: clamp(0.7rem, 2vw, 0.9rem);
+  font-size: 0.8rem;
   font-weight: bold;
   color: #ffeb3b;
   text-decoration: none;
   background: rgba(255, 255, 255, 0.2);
-  padding: 6px 10px;
+  padding: 6px 12px;
   border-radius: 5px;
   transition: 0.3s ease-in-out;
-  margin: 5px 0;
+} */
+
+.text a {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  padding: 8px 15px;
 }
 
 .text a:hover {
   background: #ffeb3b;
   color: #004d40;
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 .countdown {
-  margin: 10px 0;
-  padding: 8px;
+  margin: 15px 0;
+  padding: 10px;
   border-radius: 10px;
   background: rgba(0, 0, 0, 0.4);
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
   width: 100%;
   max-width: 500px;
-  align-self: center;
 }
 
 #timer {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 8px;
+  /* margin-top: 5px; */
 }
 
 .timer-box {
   background: rgba(255, 255, 255, 0.2);
-  padding: 5px 8px;
+  padding: 6px 10px;
   border-radius: 8px;
   text-align: center;
-  width: 60px;
-  font-size: clamp(0.7rem, 2vw, 0.9rem);
+  width: 70px;
+  font-size: clamp(0.8rem, 2vw, 1rem);
   transition: 0.3s ease-in-out;
 }
 
@@ -111,37 +104,35 @@ body {
 
 .timer-box span:first-child {
   display: block;
-  font-size: 0.65rem;
+  font-size: 0.75rem;
 }
 
 .section {
   text-align: center;
   width: 100%;
-  margin: 10px 0;
 }
 
 .section-title {
-  font-size: clamp(0.9rem, 3vw, 1.1rem);
+  font-size: 1rem;
   font-weight: bold;
   color: #ffeb3b;
   text-shadow: 0 0 10px rgba(255, 235, 59, 0.7);
-  margin: 5px 0;
 }
 
 .teachers {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 15px;
 }
 
 .teacher {
   text-align: center;
   background: rgba(255, 255, 255, 0.2);
-  padding: 8px;
-  border-radius: 8px;
+  padding: 10px;
+  border-radius: 10px;
   transition: 0.3s ease-in-out;
-  width: 80px;
+  height: 40%;
 }
 
 .teacher:hover {
@@ -149,16 +140,16 @@ body {
 }
 
 .teacher img {
-  width: 100%;
-  height: auto;
+  width: clamp(80px, 20vw, 120px);
+  height: 40%;
   object-fit: contain;
-  border-radius: 5px;
-  border: 2px solid #ffeb3b;
+  border-radius: 10px;
+  border: 3px solid #ffeb3b;
 }
 
 .teacher-name {
-  margin-top: 5px;
-  font-size: clamp(0.7rem, 2vw, 0.9rem);
+  margin-top: 8px;
+  font-size: 1rem;
   font-weight: bold;
 }
 
@@ -167,44 +158,41 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 150px;
+  height: 400px;
   background: url(masjid.png);
   background-repeat: repeat-x;
-  background-size: 800px;
+  background-size: 1200px;
   z-index: 1;
   opacity: 0.3;
   pointer-events: none;
   animation: animasinya 20s linear infinite;
 }
-
 @keyframes animasinya {
   0% {
     background-position: 0px;
   }
   100% {
-    background-position: 800px;
+    background-position: 1200px;
   }
 }
-
 .masjid:before {
   content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 200px;
+  height: 600px;
   background: url(masjid.png);
   background-repeat: repeat-x;
-  background-size: 1000px;
+  background-size: 1600px;
   z-index: 1;
   opacity: 0.1;
   pointer-events: none;
   animation: animasiMundur 40s linear infinite;
 }
-
 @keyframes animasiMundur {
   0% {
-    background-position: 1000px;
+    background-position: 1600px;
   }
   100% {
     background-position: 0px;
@@ -223,22 +211,25 @@ body {
 .footer {
   width: 100%;
   text-align: center;
-  padding: 8px 5px;
+  padding: 5px 5px;
   background: rgba(0, 0, 0, 0.3);
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   color: #fff;
-  z-index: 10;
+  position: absolute;
+  bottom: 5px;
 }
 
 .footer p {
-  margin: 3px 0;
+  margin: 1px 0;
   font-weight: bold;
+  font-size: 0.8rem;
 }
 
 .footer a {
   color: #ffeb3b;
   text-decoration: none;
   font-weight: bold;
+  font-size: 1rem;
 }
 
 .footer a:hover {
@@ -249,23 +240,22 @@ body {
 .footer-socials {
   display: flex;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   flex-wrap: wrap;
-  margin-top: 5px;
 }
 
 .footer-socials a {
   display: flex;
   align-items: center;
-  gap: 3px;
-  font-size: 0.7rem;
-  padding: 3px 6px;
-  border-radius: 3px;
-  transition: 0.2s ease-in-out;
+  gap: 5px;
+  font-size: 1rem;
+  padding: 4px 8px;
+  border-radius: 5px;
+  transition: 0.3s ease-in-out;
 }
 
 .footer-socials i {
-  font-size: 0.8rem;
+  font-size: 1rem;
 }
 
 .facebook {
@@ -280,38 +270,9 @@ body {
   color: #222;
   background: #fff;
   border-radius: 50px;
-  padding: 2px 4px;
+  padding: 3px 6px;
 }
 
 .youtube {
   color: #ff0000;
-}
-
-/* Adjustments for very small screens */
-@media (max-height: 600px) {
-  .text h1 {
-    font-size: 1rem;
-  }
-  .text h2 {
-    font-size: 0.9rem;
-    margin: 5px 0;
-    line-height: 1.2;
-  }
-  .text p {
-    font-size: 0.65rem;
-    margin: 4px 0;
-  }
-  .teacher {
-    width: 60px;
-    padding: 5px;
-  }
-  .teacher-name {
-    font-size: 0.6rem;
-  }
-  .masjid {
-    height: 100px;
-  }
-  .masjid:before {
-    height: 150px;
-  }
 }
