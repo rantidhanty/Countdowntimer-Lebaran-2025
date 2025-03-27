@@ -288,7 +288,7 @@ body {
 }
 
 /* Adjustments for very small screens */
-@media (max-height: 600px) {
+/* @media (max-height: 600px) {
   .text h1 {
     font-size: 1rem;
   }
@@ -313,5 +313,108 @@ body {
   }
   .masjid:before {
     height: 150px;
+  }
+} */
+
+/* Media Queries untuk Responsif */
+@media (min-width: 768px) {
+  .content-wrapper {
+    gap: 20px;
+    padding: 15px 0;
+  }
+
+  .text h1 {
+    font-size: 1.5rem;
+  }
+
+  .text h2 {
+    font-size: 1.3rem;
+  }
+
+  .text p {
+    font-size: 0.9rem;
+  }
+
+  .text a {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+  }
+
+  .countdown {
+    padding: 10px;
+    max-width: 450px;
+  }
+
+  .timer-box {
+    min-width: 60px;
+    font-size: 1rem;
+    padding: 6px;
+  }
+
+  .timer-box span:first-child {
+    font-size: 0.7rem;
+  }
+
+  .section-title {
+    font-size: 1rem;
+  }
+
+  .teacher {
+    width: 90px;
+    padding: 8px;
+  }
+
+  .teacher-name {
+    font-size: 0.8rem;
+  }
+
+  .masjid {
+    height: 100px;
+    background-size: 800px;
+  }
+
+  .masjid:before {
+    height: 150px;
+    background-size: 1000px;
+  }
+
+  .footer {
+    padding: 10px;
+    font-size: 0.75rem;
+  }
+
+  .footer-socials a {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+  }
+}
+
+/* Untuk layar sangat kecil (misal hp dengan tinggi < 600px) */
+@media (max-height: 600px) {
+  .content-wrapper {
+    gap: 10px;
+  }
+
+  .text h1 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+
+  .text h2 {
+    font-size: 0.9rem;
+    margin: 5px 0;
+  }
+
+  .text p {
+    font-size: 0.7rem;
+    margin: 3px 0;
+  }
+
+  .teacher {
+    width: 60px;
+  }
+
+  .masjid {
+    height: 60px;
   }
 }
