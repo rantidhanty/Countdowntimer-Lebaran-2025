@@ -146,9 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch((e) => {
           console.log("Playback blocked:", e);
-          if (isMobile) {
-            alert("Ketuk tombol musik untuk memulai audio 🎵");
-          }
+          musicBtn.style.display = "flex"; // Pastikan tombol tetap terlihat
         });
     } else {
       music.pause();
@@ -162,16 +160,22 @@ document.addEventListener("DOMContentLoaded", function () {
     toggleMusic();
   });
 
-  // Untuk mobile - Pastikan ada interaksi pengguna
+  // Untuk mobile dan desktop - Pastikan ada interaksi langsung
   const handleUserInteraction = () => {
-    toggleMusic();
+    music
+      .play()
+      .then(() => {
+        console.log("Audio started on first interaction.");
+      })
+      .catch((e) => {
+        console.log("Playback blocked:", e);
+      });
+
     document.removeEventListener("click", handleUserInteraction);
-    document.removeEventListener("keydown", handleUserInteraction);
     document.removeEventListener("touchstart", handleUserInteraction);
   };
 
   document.addEventListener("click", handleUserInteraction, { once: true });
-  document.addEventListener("keydown", handleUserInteraction, { once: true });
   document.addEventListener("touchstart", handleUserInteraction, {
     once: true,
   });
