@@ -63,64 +63,61 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Atur volume
   music.volume = 0.3;
+  musicBtn.style.display = "flex"; // Selalu tampilkan tombol di mobile
 
-  // Status musik
-  let musicPlaying = false;
-  let interactionOccurred = false;
+  // Deteksi perangkat mobile
+  const isMobile =
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
 
-  // Fungsi untuk memutar musik
-  function playMusic() {
-    music
-      .play()
-      .then(() => {
-        musicPlaying = true;
-        musicBtn.innerHTML = '<i class="ri-pause-fill"></i>';
-      })
-      .catch((e) => {
-        console.log("Autoplay blocked, waiting for manual click");
-        musicBtn.style.display = "block"; // Pastikan tombol terlihat
-      });
-  }
-
-  // Fungsi untuk menghentikan musik
-  function pauseMusic() {
-    music.pause();
-    musicPlaying = false;
-    musicBtn.innerHTML = '<i class="ri-music-2-fill"></i>';
-  }
-
-  // Toggle musik saat tombol diklik
-  musicBtn.addEventListener("click", function (e) {
-    e.stopPropagation(); // Mencegah event bubbling
-    if (musicPlaying) {
-      pauseMusic();
+  // Fungsi toggle musik
+  function toggleMusic() {
+    if (music.paused) {
+      music
+        .play()
+        .then(() => {
+          musicBtn.innerHTML = '<i class="ri-pause-fill"></i>';
+        })
+        .catch((e) => {
+          console.log("Playback blocked:", e);
+          // Tampilkan instruksi khusus untuk mobile
+          if (isMobile) {
+            alert(
+              "Silakan ketuk tombol musik di pojok kanan atas untuk memulai"
+            );
+          }
+        });
     } else {
-      playMusic();
-    }
-  });
-
-  // Coba autoplay saat interaksi pertama dengan dokumen
-  function handleFirstInteraction() {
-    if (!interactionOccurred) {
-      interactionOccurred = true;
-      playMusic();
-
-      // Hapus event listeners setelah interaksi pertama
-      document.removeEventListener("click", handleFirstInteraction);
-      document.removeEventListener("touchstart", handleFirstInteraction);
+      music.pause();
+      musicBtn.innerHTML = '<i class="ri-music-2-fill"></i>';
     }
   }
 
-  // Pasang listener untuk interaksi pertama
-  document.addEventListener("click", handleFirstInteraction, { once: true });
-  document.addEventListener("touchstart", handleFirstInteraction, {
-    once: true,
+  // Untuk Desktop - Autoplay saat interaksi pertama
+  if (!isMobile) {
+    const handleFirstInteraction = () => {
+      toggleMusic();
+      document.removeEventListener("click", handleFirstInteraction);
+      document.removeEventListener("keydown", handleFirstInteraction);
+    };
+
+    document.addEventListener("click", handleFirstInteraction, { once: true });
+    document.addEventListener("keydown", handleFirstInteraction, {
+      once: true,
+    });
+  }
+
+  // Untuk semua perangkat - Tombol kontrol manual
+  musicBtn.addEventListener("click", function (e) {
+    e.stopPropagation();
+    toggleMusic();
   });
 
-  // Fallback: Jika setelah 3 detik belum ada interaksi, tampilkan tombol
+  // Fallback universal
   setTimeout(() => {
-    if (!interactionOccurred) {
-      musicBtn.style.display = "block";
+    if (music.paused) {
+      musicBtn.style.display = "flex";
     }
   }, 3000);
 });
