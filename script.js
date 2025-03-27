@@ -56,3 +56,61 @@ updateCountdown();
 //     window.location.href = "https://google.com";
 //   }
 // }, 1000);
+
+document.addEventListener("DOMContentLoaded", function () {
+  const music = document.getElementById("bgMusic");
+  const musicBtn = document.getElementById("musicBtn");
+
+  // Atur volume
+  music.volume = 0.3;
+
+  // Fungsi toggle musik
+  function toggleMusic() {
+    if (music.paused) {
+      music
+        .play()
+        .then(() => {
+          musicBtn.innerHTML = '<i class="ri-pause-fill"></i>';
+        })
+        .catch((e) => {
+          console.log("Autoplay prevented, waiting for user interaction");
+          musicBtn.innerHTML = '<i class="ri-music-2-fill"></i>';
+        });
+    } else {
+      music.pause();
+      musicBtn.innerHTML = '<i class="ri-music-2-fill"></i>';
+    }
+  }
+
+  // Event listener untuk tombol
+  musicBtn.addEventListener("click", toggleMusic);
+
+  // Auto play saat ada interaksi dengan halaman
+  const interactionEvents = [
+    "click",
+    "touchstart",
+    "keydown",
+    "mousemove",
+    "scroll",
+  ];
+
+  const handleFirstInteraction = () => {
+    // Coba play musik
+    music
+      .play()
+      .then(() => {
+        musicBtn.innerHTML = '<i class="ri-pause-fill"></i>';
+      })
+      .catch((e) => console.log("Waiting for explicit user interaction"));
+
+    // Hapus semua event listeners setelah pertama kali interaksi
+    interactionEvents.forEach((event) => {
+      document.removeEventListener(event, handleFirstInteraction);
+    });
+  };
+
+  // Pasang listener untuk semua event interaksi
+  interactionEvents.forEach((event) => {
+    document.addEventListener(event, handleFirstInteraction, { once: true });
+  });
+});

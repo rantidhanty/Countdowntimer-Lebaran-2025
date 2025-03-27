@@ -395,3 +395,50 @@ body {
     height: 40px;
   }
 }
+
+/* Tombol Musik */
+.music-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: #ffd700; /* Kuning emas */
+  color: #333;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+}
+
+.music-btn:hover {
+  transform: scale(1.1);
+  background: #ffc000;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .music-btn {
+    width: 36px;
+    height: 36px;
+    top: 15px;
+    right: 15px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .music-btn {
+    width: 32px;
+    height: 32px;
+    top: 10px;
+    right: 10px;
+    font-size: 1rem;
+  }
+}
