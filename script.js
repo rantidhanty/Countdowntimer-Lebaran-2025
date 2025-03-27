@@ -124,21 +124,48 @@ updateCountdown();
 
 document.addEventListener("DOMContentLoaded", function () {
   const music = document.getElementById("bgMusic");
+  const musicBtn = document.getElementById("musicBtn");
+  const musicIcon = musicBtn.querySelector("i"); // Ambil ikon di dalam tombol
 
-  // Coba play musik setelah delay sedikit
-  setTimeout(() => {
+  // Tampilkan alert di awal
+  alert("Silahkan klik tombol pojok kanan ikon music 🎵");
+
+  // Fungsi toggle musik (Play/Pause)
+  function toggleMusic() {
+    if (music.paused) {
+      music.play();
+      musicIcon.className = "ri-pause-fill"; // Ganti ikon jadi pause
+    } else {
+      music.pause();
+      musicIcon.className = "ri-music-2-fill"; // Ganti ikon jadi music
+    }
+  }
+
+  // Fungsi autoplay saat interaksi pertama (klik sembarang, scroll, atau swipe)
+  function autoPlayMusic() {
     music.play().catch(() => {
       console.log("Autoplay diblokir, menunggu interaksi pengguna...");
     });
-  }, 100); // Delay kecil agar lebih natural
 
-  // Jika autoplay diblokir, jalankan saat pengguna klik pertama kali
-  document.body.addEventListener(
-    "click",
-    function () {
-      music.play();
-      console.log("Musik diputar setelah interaksi pengguna.");
-    },
-    { once: true }
-  ); // Hanya dijalankan sekali
+    // Hapus event listener setelah pertama kali dipicu
+    removeAutoPlayListeners();
+  }
+
+  // Hapus event listener setelah autoplay berhasil
+  function removeAutoPlayListeners() {
+    document.body.removeEventListener("click", autoPlayMusic);
+    window.removeEventListener("scroll", autoPlayMusic);
+    document.body.removeEventListener("touchmove", autoPlayMusic);
+  }
+
+  // 🔥 Pisahkan event listener tombol musik & autoplay
+  musicBtn.addEventListener("click", function (e) {
+    e.stopPropagation(); // Hindari konflik dengan klik global
+    toggleMusic();
+  });
+
+  // 🔥 Event listener autoplay (klik bebas, scroll, atau geser layar)
+  document.body.addEventListener("click", autoPlayMusic, { once: true });
+  window.addEventListener("scroll", autoPlayMusic, { once: true });
+  document.body.addEventListener("touchmove", autoPlayMusic, { once: true });
 });
