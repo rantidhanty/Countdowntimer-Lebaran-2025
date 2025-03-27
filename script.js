@@ -7,7 +7,7 @@ function updateCountdown() {
     clearInterval(countdownInterval);
     document.getElementById("timer").innerHTML = `
         <div class="eid-message">
-            <h2>🌙 Selamat Hari Raya Idul Fitri 1446 H! 🌙</h2>
+            <h2>Selamat Hari Raya Idul Fitri 1446 H!</h2>
             <p>Semoga Idul Fitri ini membawa keberkahan, kedamaian, dan kebahagiaan untuk kita semua.</p>
             <p class="highlight">Mohon maaf lahir dan batin. 🤲✨</p>
         </div>
@@ -33,29 +33,29 @@ const countdownInterval = setInterval(updateCountdown, 1000);
 updateCountdown();
 
 // 🔒 Blokir Klik Kanan
-// document.addEventListener("contextmenu", function (e) {
-//   e.preventDefault();
-// });
+document.addEventListener("contextmenu", function (e) {
+  e.preventDefault();
+});
 
 // 🔒 Blokir F12, Ctrl+Shift+I, Ctrl+U
-// document.addEventListener("keydown", function (e) {
-//   if (
-//     e.key === "F12" ||
-//     (e.ctrlKey && e.shiftKey && e.key === "I") ||
-//     (e.ctrlKey && e.key === "u")
-//   ) {
-//     e.preventDefault();
-//   }
-// });
+document.addEventListener("keydown", function (e) {
+  if (
+    e.key === "F12" ||
+    (e.ctrlKey && e.shiftKey && e.key === "I") ||
+    (e.ctrlKey && e.key === "u")
+  ) {
+    e.preventDefault();
+  }
+});
 
-// setInterval(() => {
-//   let before = new Date().getTime();
-//   debugger;
-//   let after = new Date().getTime();
-//   if (after - before > 100) {
-//     window.location.href = "https://google.com";
-//   }
-// }, 1000);
+setInterval(() => {
+  let before = new Date().getTime();
+  debugger;
+  let after = new Date().getTime();
+  if (after - before > 100) {
+    window.location.href = "https://google.com";
+  }
+}, 1000);
 
 document.addEventListener("DOMContentLoaded", function () {
   const music = document.getElementById("bgMusic");
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Atur volume
   music.volume = 0.3;
-  musicBtn.style.display = "flex"; // Selalu tampilkan tombol di mobile
+  musicBtn.style.display = "flex";
 
   // Deteksi perangkat mobile
   const isMobile =
