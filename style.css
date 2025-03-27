@@ -4,7 +4,7 @@ body {
   padding: 0;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
+  /* overflow: hidden; */
   display: flex;
   flex-direction: column;
   background: linear-gradient(to bottom, #009688, #004d40);
