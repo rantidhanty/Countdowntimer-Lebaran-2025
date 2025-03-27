@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  overflow: hidden;
+  /* overflow: hidden; */
   display: flex;
   flex-direction: column;
   background: linear-gradient(to bottom, #009688, #004d40);
@@ -286,35 +286,6 @@ body {
 .youtube {
   color: #ff0000;
 }
-
-/* Adjustments for very small screens */
-/* @media (max-height: 600px) {
-  .text h1 {
-    font-size: 1rem;
-  }
-  .text h2 {
-    font-size: 0.9rem;
-    margin: 5px 0;
-    line-height: 1.2;
-  }
-  .text p {
-    font-size: 0.65rem;
-    margin: 4px 0;
-  }
-  .teacher {
-    width: 60px;
-    padding: 5px;
-  }
-  .teacher-name {
-    font-size: 0.6rem;
-  }
-  .masjid {
-    height: 100px;
-  }
-  .masjid:before {
-    height: 150px;
-  }
-} */
 
 /* Media Queries untuk Responsif */
 @media (min-width: 768px) {
