@@ -175,7 +175,7 @@ body {
   background-repeat: repeat-x;
   background-size: 800px;
   z-index: 1;
-  opacity: 0.3;
+  opacity: 0.5;
   pointer-events: none;
   animation: animasinya 20s linear infinite;
 }
@@ -200,7 +200,7 @@ body {
   background-repeat: repeat-x;
   background-size: 1000px;
   z-index: 1;
-  opacity: 0.1;
+  opacity: 0.2;
   pointer-events: none;
   animation: animasiMundur 40s linear infinite;
 }

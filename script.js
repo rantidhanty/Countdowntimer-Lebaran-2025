@@ -64,53 +64,63 @@ document.addEventListener("DOMContentLoaded", function () {
   // Atur volume
   music.volume = 0.3;
 
-  // Fungsi toggle musik
-  function toggleMusic() {
-    if (music.paused) {
-      music
-        .play()
-        .then(() => {
-          musicBtn.innerHTML = '<i class="ri-pause-fill"></i>';
-        })
-        .catch((e) => {
-          console.log("Autoplay prevented, waiting for user interaction");
-          musicBtn.innerHTML = '<i class="ri-music-2-fill"></i>';
-        });
-    } else {
-      music.pause();
-      musicBtn.innerHTML = '<i class="ri-music-2-fill"></i>';
-    }
-  }
+  // Status musik
+  let musicPlaying = false;
+  let interactionOccurred = false;
 
-  // Event listener untuk tombol
-  musicBtn.addEventListener("click", toggleMusic);
-
-  // Auto play saat ada interaksi dengan halaman
-  const interactionEvents = [
-    "click",
-    "touchstart",
-    "keydown",
-    "mousemove",
-    "scroll",
-  ];
-
-  const handleFirstInteraction = () => {
-    // Coba play musik
+  // Fungsi untuk memutar musik
+  function playMusic() {
     music
       .play()
       .then(() => {
+        musicPlaying = true;
         musicBtn.innerHTML = '<i class="ri-pause-fill"></i>';
       })
-      .catch((e) => console.log("Waiting for explicit user interaction"));
+      .catch((e) => {
+        console.log("Autoplay blocked, waiting for manual click");
+        musicBtn.style.display = "block"; // Pastikan tombol terlihat
+      });
+  }
 
-    // Hapus semua event listeners setelah pertama kali interaksi
-    interactionEvents.forEach((event) => {
-      document.removeEventListener(event, handleFirstInteraction);
-    });
-  };
+  // Fungsi untuk menghentikan musik
+  function pauseMusic() {
+    music.pause();
+    musicPlaying = false;
+    musicBtn.innerHTML = '<i class="ri-music-2-fill"></i>';
+  }
 
-  // Pasang listener untuk semua event interaksi
-  interactionEvents.forEach((event) => {
-    document.addEventListener(event, handleFirstInteraction, { once: true });
+  // Toggle musik saat tombol diklik
+  musicBtn.addEventListener("click", function (e) {
+    e.stopPropagation(); // Mencegah event bubbling
+    if (musicPlaying) {
+      pauseMusic();
+    } else {
+      playMusic();
+    }
   });
+
+  // Coba autoplay saat interaksi pertama dengan dokumen
+  function handleFirstInteraction() {
+    if (!interactionOccurred) {
+      interactionOccurred = true;
+      playMusic();
+
+      // Hapus event listeners setelah interaksi pertama
+      document.removeEventListener("click", handleFirstInteraction);
+      document.removeEventListener("touchstart", handleFirstInteraction);
+    }
+  }
+
+  // Pasang listener untuk interaksi pertama
+  document.addEventListener("click", handleFirstInteraction, { once: true });
+  document.addEventListener("touchstart", handleFirstInteraction, {
+    once: true,
+  });
+
+  // Fallback: Jika setelah 3 detik belum ada interaksi, tampilkan tombol
+  setTimeout(() => {
+    if (!interactionOccurred) {
+      musicBtn.style.display = "block";
+    }
+  }, 3000);
 });
