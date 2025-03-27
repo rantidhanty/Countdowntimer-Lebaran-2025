@@ -124,66 +124,21 @@ updateCountdown();
 
 document.addEventListener("DOMContentLoaded", function () {
   const music = document.getElementById("bgMusic");
-  const musicBtn = document.getElementById("musicBtn");
 
-  // Atur volume awal
-  music.volume = 0.3;
-  musicBtn.style.display = "flex";
-
-  // Deteksi perangkat mobile
-  const isMobile =
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    );
-
-  // Fungsi toggle musik
-  function toggleMusic() {
-    if (music.paused) {
-      music
-        .play()
-        .then(() => {
-          musicBtn.innerHTML = '<i class="ri-pause-fill"></i>';
-        })
-        .catch((e) => {
-          console.log("Playback blocked:", e);
-          musicBtn.style.display = "flex"; // Pastikan tombol tetap terlihat
-        });
-    } else {
-      music.pause();
-      musicBtn.innerHTML = '<i class="ri-music-2-fill"></i>';
-    }
-  }
-
-  // Untuk semua perangkat - Tombol kontrol manual
-  musicBtn.addEventListener("click", function (e) {
-    e.stopPropagation();
-    toggleMusic();
-  });
-
-  // Untuk mobile dan desktop - Pastikan ada interaksi langsung
-  const handleUserInteraction = () => {
-    music
-      .play()
-      .then(() => {
-        console.log("Audio started on first interaction.");
-      })
-      .catch((e) => {
-        console.log("Playback blocked:", e);
-      });
-
-    document.removeEventListener("click", handleUserInteraction);
-    document.removeEventListener("touchstart", handleUserInteraction);
-  };
-
-  document.addEventListener("click", handleUserInteraction, { once: true });
-  document.addEventListener("touchstart", handleUserInteraction, {
-    once: true,
-  });
-
-  // Fallback universal
+  // Coba play musik setelah delay sedikit
   setTimeout(() => {
-    if (music.paused) {
-      musicBtn.style.display = "flex";
-    }
-  }, 3000);
+    music.play().catch(() => {
+      console.log("Autoplay diblokir, menunggu interaksi pengguna...");
+    });
+  }, 100); // Delay kecil agar lebih natural
+
+  // Jika autoplay diblokir, jalankan saat pengguna klik pertama kali
+  document.body.addEventListener(
+    "click",
+    function () {
+      music.play();
+      console.log("Musik diputar setelah interaksi pengguna.");
+    },
+    { once: true }
+  ); // Hanya dijalankan sekali
 });
